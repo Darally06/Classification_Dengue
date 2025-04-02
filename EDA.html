@@ -1,0 +1,2162 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Análisis exploratorio del Dengue en Colombia &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'EDA';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Modelos de clasificación" href="Modelos_Dengue.html" />
+    <link rel="prev" title="Introducción" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introducción
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Análisis exploratorio del Dengue en Colombia</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Modelos_Dengue.html"><strong>Modelos de clasificación</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FEDA.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/EDA.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Análisis exploratorio del Dengue en Colombia</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Análisis exploratorio del Dengue en Colombia</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-de-los-datos">Descripción de los datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#requerimientos-e-importaciones">Requerimientos e importaciones</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-archivos-y-seleccion-de-variables-de-interes">Lectura de archivos y selección de variables de interes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptivo-de-variables"><strong>Descriptivo de variables</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-nulos">Valores nulos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#informacion-demografica"><strong>Información demográfica</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edad">Edad</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#grupo-de-edad-menores-a-5-anos">Grupo de edad menores a 5 años</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#grupo-de-edad-mayores-a-65-anos">Grupo de edad mayores a 65 años</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general">General</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ubicacion"><strong>Ubicación</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#departamentos">Departamentos</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#departamentos-por-densidad-poblacional">Departamentos por densidad poblacional</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#municipios">Municipios</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporales"><strong>Temporales</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#semana">Semana</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-clinicos"><strong>Datos clínicos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evento">Evento</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#evento-por-anos">Evento por años</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#decesos-por-evento">Decesos por evento</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estado-del-caso">Estado del caso</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confirmados">Confirmados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hospitalizacion">Hospitalización</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hospitalizacion-de-pacientes-por-ano">Hospitalización de pacientes por año</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pacientes-hospitalizados-por-sexo">Pacientes Hospitalizados por sexo</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pacientes-hospitalizados-por-evento">Pacientes hospitalizados por evento</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-parametricas"><strong>Pruebas paramétricas</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-chi-cuadrado">Prueba chi-cuadrado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-u">Prueba U</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analisis-exploratorio-del-dengue-en-colombia">
+<h1><strong>Análisis exploratorio del Dengue en Colombia</strong><a class="headerlink" href="#analisis-exploratorio-del-dengue-en-colombia" title="Link to this heading">#</a></h1>
+<p>Reporte basado en datos de SIVIGILA</p>
+<p>El dengue es una enfermedad viral aguda, causada por un virus transmitido a través de la picadura de mosquitos infectados. Esta representa una de las principales amenazas para la salud pública en regiones tropicales y subtropicales, afectando anualmente a millones de personas en todo el mundo (OMS, 2023).</p>
+<p>Este informe presenta un análisis exploratorio de los casos reportados en Colombia entre 2013 y 2018, utilizando datos de SIVIGILA.</p>
+<section id="descripcion-de-los-datos">
+<h2>Descripción de los datos<a class="headerlink" href="#descripcion-de-los-datos" title="Link to this heading">#</a></h2>
+<p>El dataset analizado contiene 500,444 registros y 22 variables de interés, entre las cuales se encuentran:</p>
+<ul class="simple">
+<li><p>Información demográfica: edad, sexo, tipo de seguridad social.</p></li>
+<li><p>Ubicación: departamento y municipio donde ocurrió el caso.</p></li>
+<li><p>Variables temporales: año de ocurrencia y semana epidemiológica.</p></li>
+<li><p>Datos clínicos: estado del caso, hospitalización, confirmación.</p></li>
+</ul>
+<section id="requerimientos-e-importaciones">
+<h3>Requerimientos e importaciones<a class="headerlink" href="#requerimientos-e-importaciones" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Requeriments</span>
+<span class="c1">#!pip install pandas</span>
+<span class="c1">#!pip install numpy</span>
+<span class="c1">#!pip install readxl</span>
+<span class="c1">#!pip install matplotlib</span>
+<span class="c1">#!pip install seaborn</span>
+<span class="c1">#!pip install scipy</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Librerias</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">stats</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="lectura-de-archivos-y-seleccion-de-variables-de-interes">
+<h3>Lectura de archivos y selección de variables de interes<a class="headerlink" href="#lectura-de-archivos-y-seleccion-de-variables-de-interes" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 500444 entries, 0 to 500443
+Data columns (total 21 columns):
+ #   Column         Non-Null Count   Dtype         
+---  ------         --------------   -----         
+ 0   EDAD_AJUSTADA  500424 non-null  float64       
+ 1   SEXO           500444 non-null  object        
+ 2   TIP_SS         500444 non-null  object        
+ 3   GP_MIGRANT     500444 non-null  int64         
+ 4   GP_POBICFB     500444 non-null  int64         
+ 5   GP_GESTAN      500444 non-null  int64         
+ 6   AREA           500444 non-null  int64         
+ 7   PAIS_OCU       500444 non-null  object        
+ 8   DPTO_OCU       500444 non-null  object        
+ 9   MUN_OCU        500444 non-null  object        
+ 10  SEMANA         500444 non-null  int64         
+ 11  ANO            500444 non-null  int64         
+ 12  EVENTO         500444 non-null  object        
+ 13  TIP_CAS        500444 non-null  int64         
+ 14  ESTADO_FINAL   492156 non-null  float64       
+ 15  CASO           492156 non-null  object        
+ 16  PAC_HOS        500444 non-null  int64         
+ 17  CON_FIN        500444 non-null  int64         
+ 18  confirmados    500444 non-null  int64         
+ 19  FEC_CON        500352 non-null  datetime64[ns]
+ 20  INI_SIN        500391 non-null  datetime64[ns]
+dtypes: datetime64[ns](2), float64(2), int64(10), object(7)
+memory usage: 80.2+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>El dataset cuenta con 500444 registros, de los cuales se seleccionaron 20 variables de interés para el análisis exploratorio.</p>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="descriptivo-de-variables">
+<h1><strong>Descriptivo de variables</strong><a class="headerlink" href="#descriptivo-de-variables" title="Link to this heading">#</a></h1>
+<section id="valores-nulos">
+<h2>Valores nulos<a class="headerlink" href="#valores-nulos" title="Link to this heading">#</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/905ac4a52ca51445514ba15b3b1fd3bbc3d1bb41e5a4b6608bf25b32043b894a.png" src="_images/905ac4a52ca51445514ba15b3b1fd3bbc3d1bb41e5a4b6608bf25b32043b894a.png" />
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tabla de valores faltantes
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable</th>
+      <th>Cantidad_NA</th>
+      <th>Porcentaje_NA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>EDAD_AJUSTADA</td>
+      <td>20</td>
+      <td>0.003996</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>ESTADO_FINAL</td>
+      <td>8288</td>
+      <td>1.656129</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>CASO</td>
+      <td>8288</td>
+      <td>1.656129</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>FEC_CON</td>
+      <td>92</td>
+      <td>0.018384</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>INI_SIN</td>
+      <td>53</td>
+      <td>0.010591</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Las variables <em>“Edad”, “Estado final”, “Caso”, “Fecha consulta”, “Fecha inicio de síntomas” y “Fecha hospitalización”</em>, presentan datos perdidos. En su mayoría el porcentaje de pérdida es menor al <span class="math notranslate nohighlight">\(5\%\)</span>, por lo que para efectos del análisis descriptivo no se realizará imputación de datos.</p>
+</section>
+<section id="informacion-demografica">
+<h2><strong>Información demográfica</strong><a class="headerlink" href="#informacion-demografica" title="Link to this heading">#</a></h2>
+<section id="edad">
+<h3>Edad<a class="headerlink" href="#edad" title="Link to this heading">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Para la variable edad se realizó un ajuste dependiendo la unidad de medida registrada. Los valores registrados en tiempo en meses, semanas o días se tomarán con valor referencial de 1 año.</p>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variable edad de los pacientes
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    500424.000000
+mean         25.339240
+std          19.895208
+min           1.000000
+25%          10.000000
+50%          20.000000
+75%          37.000000
+max         114.000000
+Name: EDAD_AJUSTADA, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/5a340b28567455453b6e525621a68025c14ad2912c4b33410beb4b011b83ba5e.png" src="_images/5a340b28567455453b6e525621a68025c14ad2912c4b33410beb4b011b83ba5e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Valor de asimetria</span>
+<span class="n">skewness</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">skew</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;EDAD_AJUSTADA&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Valor de asimetría: </span><span class="si">{</span><span class="n">skewness</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valor de asimetría: 0.9486048462139235
+</pre></div>
+</div>
+</div>
+</div>
+<p>En la <em>Figura 2</em> se muestra la distribución de la edad de los pacientes, la cual varía entre <span class="math notranslate nohighlight">\(1\)</span> y <span class="math notranslate nohighlight">\(114\)</span> años, con una media de <span class="math notranslate nohighlight">\(25\)</span> años (<span class="math notranslate nohighlight">\(\pm 19.9\)</span>). La mayor concentración de casos se encuentra en el rango de <span class="math notranslate nohighlight">\(10\)</span> a <span class="math notranslate nohighlight">\(37\)</span> años.</p>
+<p>Se identifican valores atípicos a partir de los <span class="math notranslate nohighlight">\(77\)</span> años, con casos aislados de personas en edades avanzadas. La distribución de la edad exhibe una marcada asimetría positiva <span class="math notranslate nohighlight">\((0.94)\)</span>.</p>
+<section id="grupo-de-edad-menores-a-5-anos">
+<h4>Grupo de edad menores a 5 años<a class="headerlink" href="#grupo-de-edad-menores-a-5-anos" title="Link to this heading">#</a></h4>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Distribución edad de los pacientes
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Edad</th>
+      <th>Pacientes</th>
+      <th>Porcentaje</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.0</td>
+      <td>24917</td>
+      <td>36.245</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5.0</td>
+      <td>12202</td>
+      <td>17.749</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.0</td>
+      <td>11444</td>
+      <td>16.647</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3.0</td>
+      <td>10412</td>
+      <td>15.146</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2.0</td>
+      <td>9771</td>
+      <td>14.213</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/1a1163a6a2a7592c457ec6e5f5fe98da5f63d8a81adb2a1300f1b0f28a19eded.png" src="_images/1a1163a6a2a7592c457ec6e5f5fe98da5f63d8a81adb2a1300f1b0f28a19eded.png" />
+</div>
+</div>
+<p>En el grupo etario de menores a 5 años, en su mayoría (36.34%) tienen 1 año.</p>
+</section>
+<section id="grupo-de-edad-mayores-a-65-anos">
+<h4>Grupo de edad mayores a 65 años<a class="headerlink" href="#grupo-de-edad-mayores-a-65-anos" title="Link to this heading">#</a></h4>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/d956719195a3339f521c7675c941a13e01d76b5610f0cbe64a79b6e79913efba.png" src="_images/d956719195a3339f521c7675c941a13e01d76b5610f0cbe64a79b6e79913efba.png" />
+</div>
+</div>
+<p>En la <em>Figura 3</em>, el diagrama de cajas y bigotes representa la distribución de la edad de los pacientes mayores de <span class="math notranslate nohighlight">\(65\)</span> años. El rango intercuartil (<span class="math notranslate nohighlight">\(50\%\)</span> central de los datos) se encuentra entre los <span class="math notranslate nohighlight">\(68\)</span> y <span class="math notranslate nohighlight">\(79\)</span> años. A partir de los <span class="math notranslate nohighlight">\(95\)</span> años se identifican valores atípicos, correspondientes a pacientes de edad avanzada.</p>
+</section>
+</section>
+<section id="general">
+<h3>General<a class="headerlink" href="#general" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SEXO
+M    52.495984
+F    47.504016
+Name: proportion, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tipo de aseguradora
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TIP_SS
+C    48.953329
+S    40.877101
+N     4.069586
+E     2.977356
+P     2.797116
+I     0.325511
+Name: proportion, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pertenencia a grupos de interés
+  Grupo de Pertenencia  Cantidad de Personas
+0           GP_MIGRANT                  1192
+1            GP_GESTAN                  3611
+2           GP_POBICFB                   742
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AREA
+1    81.931645
+2     9.087131
+3     8.981225
+Name: proportion, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>La distribución por sexo es relativamente equilibrada, con un <span class="math notranslate nohighlight">\(52.5\%\)</span> de los pacientes siendo hombres y un <span class="math notranslate nohighlight">\(47.5\%\)</span> mujeres. En cuanto a la afiliación al sistema de salud, la mayoría de los pacientes están vinculados al régimen contributivo (<span class="math notranslate nohighlight">\(48.95\%\)</span>) o al régimen subsidiado (<span class="math notranslate nohighlight">\(40.87\%\)</span>).</p>
+<p>Respecto a los grupos de pertenencia, se identificaron <span class="math notranslate nohighlight">\(1192\)</span> personas migrantes, <span class="math notranslate nohighlight">\(3611\)</span> pertenecientes a la población gestante y <span class="math notranslate nohighlight">\(742\)</span> asociadas al Instituto Colombiano de Bienestar Familiar (ICBF).</p>
+<p>En relación con el área de residencia, la mayoría de los casos (<span class="math notranslate nohighlight">\(81.9\%\)</span>) se registraron en cabeceras municipales, mientras que un <span class="math notranslate nohighlight">\(9.1\%\)</span> ocurrieron en centros poblados y un <span class="math notranslate nohighlight">\(8.9\%\)</span> en zonas rurales dispersas.</p>
+</section>
+</section>
+<section id="ubicacion">
+<h2><strong>Ubicación</strong><a class="headerlink" href="#ubicacion" title="Link to this heading">#</a></h2>
+<section id="departamentos">
+<h3>Departamentos<a class="headerlink" href="#departamentos" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Top 10 departamentos de mayor ocurrencia
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Departamento</th>
+      <th>Casos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>VALLE</td>
+      <td>86298</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ANTIOQUIA</td>
+      <td>55248</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SANTANDER</td>
+      <td>50337</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>TOLIMA</td>
+      <td>42990</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>META</td>
+      <td>31442</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>NORTE SANTANDER</td>
+      <td>29661</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>ATLANTICO</td>
+      <td>24657</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>HUILA</td>
+      <td>23393</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>CUNDINAMARCA</td>
+      <td>18600</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>CESAR</td>
+      <td>16456</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/912e82f2cb0b4c2010789130b64b3be4fe72aa7398bbd98f7ee016cff9c3f30c.png" src="_images/912e82f2cb0b4c2010789130b64b3be4fe72aa7398bbd98f7ee016cff9c3f30c.png" />
+</div>
+</div>
+<p>En la <strong>Figura 5</strong>, el diagrama de barras muestra los 10 departamentos con mayor número de casos de dengue en Colombia. Valle del Cauca encabeza la lista con <span class="math notranslate nohighlight">\(86,298\)</span> casos, seguido de Antioquia con <span class="math notranslate nohighlight">\(55,248\)</span> y Santander con <span class="math notranslate nohighlight">\(50,337\)</span>.<br />
+Por otro lado, los departamentos con menor cantidad de casos reportados son Vaupés <span class="math notranslate nohighlight">\((54)\)</span>, San Andrés <span class="math notranslate nohighlight">\((433)\)</span>, Guainía <span class="math notranslate nohighlight">\((543)\)</span>, Vichada <span class="math notranslate nohighlight">\((838)\)</span> y los casos procedentes del exterior <span class="math notranslate nohighlight">\((906)\)</span>.</p>
+<section id="departamentos-por-densidad-poblacional">
+<h4>Departamentos por densidad poblacional<a class="headerlink" href="#departamentos-por-densidad-poblacional" title="Link to this heading">#</a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Para el análisis demográfico, se han tomado los datos proporcionados por el censo poblacional del DANE (2018) para referenciar la cantidad de casos por población.</p>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Cargado datos</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">deptos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\Users\danie\Dengue\Dengue_fill\Datos\poblacion_departamentos.xlsx&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">deptos</span><span class="p">[</span><span class="s2">&quot;Población&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">deptos</span><span class="p">[</span><span class="s2">&quot;Población&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;Int64&quot;</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\Hp\anaconda3\envs\Data_dengue\lib\site-packages\pandas\io\excel\_base.py:495,</span> in <span class="ni">read_excel</span><span class="nt">(io, sheet_name, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skiprows, nrows, na_values, keep_default_na, na_filter, verbose, parse_dates, date_parser, date_format, thousands, decimal, comment, skipfooter, storage_options, dtype_backend, engine_kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">493</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="n">ExcelFile</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">494</span>     <span class="n">should_close</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="ne">--&gt; </span><span class="mi">495</span>     <span class="n">io</span> <span class="o">=</span> <span class="n">ExcelFile</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">496</span>         <span class="n">io</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">497</span>         <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">498</span>         <span class="n">engine</span><span class="o">=</span><span class="n">engine</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">499</span>         <span class="n">engine_kwargs</span><span class="o">=</span><span class="n">engine_kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">500</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">501</span> <span class="k">elif</span> <span class="n">engine</span> <span class="ow">and</span> <span class="n">engine</span> <span class="o">!=</span> <span class="n">io</span><span class="o">.</span><span class="n">engine</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">502</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">503</span>         <span class="s2">&quot;Engine should not be specified when passing &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">504</span>         <span class="s2">&quot;an ExcelFile - ExcelFile already has the engine set&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">505</span>     <span class="p">)</span>
+
+<span class="nn">File c:\Users\Hp\anaconda3\envs\Data_dengue\lib\site-packages\pandas\io\excel\_base.py:1550,</span> in <span class="ni">ExcelFile.__init__</span><span class="nt">(self, path_or_buffer, engine, storage_options, engine_kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1548</span>     <span class="n">ext</span> <span class="o">=</span> <span class="s2">&quot;xls&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1549</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1550</span>     <span class="n">ext</span> <span class="o">=</span> <span class="n">inspect_excel_format</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1551</span>         <span class="n">content_or_path</span><span class="o">=</span><span class="n">path_or_buffer</span><span class="p">,</span> <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span>
+<span class="g g-Whitespace">   </span><span class="mi">1552</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1553</span>     <span class="k">if</span> <span class="n">ext</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1554</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1555</span>             <span class="s2">&quot;Excel file format cannot be determined, you must specify &quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1556</span>             <span class="s2">&quot;an engine manually.&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1557</span>         <span class="p">)</span>
+
+<span class="nn">File c:\Users\Hp\anaconda3\envs\Data_dengue\lib\site-packages\pandas\io\excel\_base.py:1402,</span> in <span class="ni">inspect_excel_format</span><span class="nt">(content_or_path, storage_options)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1399</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">content_or_path</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1400</span>     <span class="n">content_or_path</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">(</span><span class="n">content_or_path</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1402</span> <span class="k">with</span> <span class="n">get_handle</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1403</span>     <span class="n">content_or_path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">,</span> <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span><span class="p">,</span> <span class="n">is_text</span><span class="o">=</span><span class="kc">False</span>
+<span class="g g-Whitespace">   </span><span class="mi">1404</span> <span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1405</span>     <span class="n">stream</span> <span class="o">=</span> <span class="n">handle</span><span class="o">.</span><span class="n">handle</span>
+<span class="g g-Whitespace">   </span><span class="mi">1406</span>     <span class="n">stream</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\Hp\anaconda3\envs\Data_dengue\lib\site-packages\pandas\io\common.py:882,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">873</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">874</span>             <span class="n">handle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">875</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">878</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">879</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">880</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">881</span>         <span class="c1"># Binary mode</span>
+<span class="ne">--&gt; </span><span class="mi">882</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">883</span>     <span class="n">handles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">885</span> <span class="c1"># Convert BytesIO or file objects passed with an encoding</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;C:\\Users\\danie\\Dengue\\Dengue_fill\\Datos\\poblacion_departamentos.xlsx&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Departamentos con mayor densidad de casos
+       Departamento  Casos  Población  Densidad_Casos
+24         GUAVIARE   2566      73081     3511.172535
+3            TOLIMA  42990    1228763     3498.640503
+4              META  31442     919129     3420.847346
+14         CASANARE  10244     379892     2696.555863
+16         PUTUMAYO   7347     283197     2594.307143
+2         SANTANDER  50337    2008841     2505.773229
+13          QUINDIO  12621     509640     2476.453968
+7             HUILA  23393    1009548     2317.175607
+0             VALLE  86298    3789874     2277.067786
+5   NORTE SANTANDER  29661    1346806     2202.321641
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/784ec7edc0c5087b21c332158d69b7b4fdb4185662d9f3b55454845f1376e8b5.png" src="_images/784ec7edc0c5087b21c332158d69b7b4fdb4185662d9f3b55454845f1376e8b5.png" />
+</div>
+</div>
+<p>El gráfico describe los departamentos con mayor densidad de casos por cada <span class="math notranslate nohighlight">\(100,000\)</span> habitantes. Guaviare es el departamento con la mayor densidad de casos <span class="math notranslate nohighlight">\((351.12)\)</span>, seguido por Tolima <span class="math notranslate nohighlight">\((349.86)\)</span> y Meta <span class="math notranslate nohighlight">\((342.08)\)</span>.</p>
+<p>Es importante destacar que Guaviare, a pesar de tener a población baja (<span class="math notranslate nohighlight">\(72,081\)</span> habitantes), registra la mayor densidad de casos. Por otro lado, Tolima y Meta no solo están entre los 10 departamentos con más casos, sino que también presentan alta carga de casos en relación con su población.
+Finalmente, Casanare y Putumayo, a pesar de contar con una población relativamente baja, también presentan altos índices de densidad de casos.</p>
+</section>
+</section>
+<section id="municipios">
+<h3>Municipios<a class="headerlink" href="#municipios" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabla_mun</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Mayor ocurrencia&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;MUN_OCU&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+    <span class="s2">&quot;Casos&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;MUN_OCU&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top 10 municipios de mayor ocurrencia&quot;</span><span class="p">)</span>
+<span class="n">tabla_mun</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Top 10 municipios de mayor ocurrencia
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Mayor ocurrencia</th>
+      <th>Casos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CALI</td>
+      <td>62954</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>MEDELLIN</td>
+      <td>29978</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>IBAGUE</td>
+      <td>17503</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CUCUTA</td>
+      <td>16361</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>VILLAVICENCIO</td>
+      <td>15634</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>BUCARAMANGA</td>
+      <td>15602</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>BARRANQUILLA</td>
+      <td>11274</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>NEIVA</td>
+      <td>10405</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>FLORIDABLANCA</td>
+      <td>9245</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>SINCELEJO</td>
+      <td>7839</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">df_filtered_mun</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;MUN_OCU&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span> <span class="n">x</span> <span class="o">=</span> <span class="n">df_filtered_mun</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df_filtered_mun</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+            <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Blues_r&quot;</span><span class="p">,</span> <span class="n">hue</span> <span class="o">=</span> <span class="n">df_filtered_mun</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Municipios con más casos reportados de dengue (Top 10)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Municipios&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/171919e4b769cfe991a6969aa82ef590d553500a553b38fa0137dcdb1d2788a0.png" src="_images/171919e4b769cfe991a6969aa82ef590d553500a553b38fa0137dcdb1d2788a0.png" />
+</div>
+</div>
+<p>En la <strong>Figura 6</strong>, el diagrama de barras presenta los 10 municipios con mayor número de casos de Dengue en Colombia. Cali es la ciudad con el mayor número de casos reportados, con <span class="math notranslate nohighlight">\(62,954\)</span> observaciones, seguida por Medellín <span class="math notranslate nohighlight">\(29,978\)</span> e Ibagué <span class="math notranslate nohighlight">\(17,503\)</span>, con una diferencia significativa respecto a la primera.</p>
+</section>
+</section>
+<section id="temporales">
+<h2><strong>Temporales</strong><a class="headerlink" href="#temporales" title="Link to this heading">#</a></h2>
+<section id="semana">
+<h3>Semana<a class="headerlink" href="#semana" title="Link to this heading">#</a></h3>
+<p>La variable representa la semana epidemiológica en la que ocurrió el evento de acuerdo al calendario Colombiano para cada año. Tener en cuenta que en el año <span class="math notranslate nohighlight">\(2014\)</span> se requirió de adición de la semana 53.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/da75e0988ef3bf78fdd002da615d63d1a5f2475373399713f62eba37e71f275e.png" src="_images/da75e0988ef3bf78fdd002da615d63d1a5f2475373399713f62eba37e71f275e.png" />
+</div>
+</div>
+<p>La <em>Figura 7</em>, muestra la distribución de casos por semana para cada año estudiado. En <span class="math notranslate nohighlight">\(2016\)</span>, los casos registrados muestran una tendencia a la baja a lo largo del año. En contraste, en <span class="math notranslate nohighlight">\(2018\)</span>, los casos aumentaron con el transcurso de las semanas. Los años <span class="math notranslate nohighlight">\(2013\)</span> y <span class="math notranslate nohighlight">\(2014\)</span> presentan mayor número de casos reportados por semana, mientras que el año <span class="math notranslate nohighlight">\(2015\)</span> se caracteriza por una alta fluctuación en el número de casos semanales. Por otro lado, <span class="math notranslate nohighlight">\(2017\)</span> fue el año con menor número de casos registrados.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Top 10 de Semanas con mayor ocurrencia
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Semana</th>
+      <th>Casos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>10620</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>10647</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>10628</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>5</td>
+      <td>10732</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>6</td>
+      <td>10323</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>15</td>
+      <td>10322</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>19</td>
+      <td>10345</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>20</td>
+      <td>10546</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>21</td>
+      <td>10714</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>22</td>
+      <td>10440</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Cabe resaltar que las semanas con mayor número de casos reportados se encuentran entre la semana  1 y la 6, así como en la semana 19 y la 22. En cambio, las semanas con menor notificación de casos corresponden al periodo entre la semana 32 y la 41.</p>
+</section>
+</section>
+<section id="datos-clinicos">
+<h2><strong>Datos clínicos</strong><a class="headerlink" href="#datos-clinicos" title="Link to this heading">#</a></h2>
+<section id="evento">
+<h3>Evento<a class="headerlink" href="#evento" title="Link to this heading">#</a></h3>
+<p>Los casos de dengue en el reporte fueron catalogados como Dengue y Dengue grave. Del total de casos solo el <span class="math notranslate nohighlight">\(1.76\%\)</span> fue catalogado como Dengue grave.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Distribución de eventos
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Evento</th>
+      <th>Pacientes</th>
+      <th>Porcentaje</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>DENGUE</td>
+      <td>491637</td>
+      <td>98.24</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>DENGUE GRAVE</td>
+      <td>8807</td>
+      <td>1.76</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="evento-por-anos">
+<h4>Evento por años<a class="headerlink" href="#evento-por-anos" title="Link to this heading">#</a></h4>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cantidad de eventos por año
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>EVENTO</th>
+      <th>DENGUE</th>
+      <th>DENGUE GRAVE</th>
+    </tr>
+    <tr>
+      <th>ANO</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013</th>
+      <td>122441</td>
+      <td>3113</td>
+    </tr>
+    <tr>
+      <th>2014</th>
+      <td>105356</td>
+      <td>2619</td>
+    </tr>
+    <tr>
+      <th>2015</th>
+      <td>95023</td>
+      <td>1421</td>
+    </tr>
+    <tr>
+      <th>2016</th>
+      <td>100117</td>
+      <td>899</td>
+    </tr>
+    <tr>
+      <th>2017</th>
+      <td>25048</td>
+      <td>236</td>
+    </tr>
+    <tr>
+      <th>2018</th>
+      <td>43652</td>
+      <td>519</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/74ebe28629ad1866e182e5f75a1c5694cce0416c5a02ddda74b0018869c30c63.png" src="_images/74ebe28629ad1866e182e5f75a1c5694cce0416c5a02ddda74b0018869c30c63.png" />
+</div>
+</div>
+<p>En la <em>Figura 8</em> se presenta la cantidad de pacientes hospitalizados por Dengue y Dengue Grave en Colombia, a lo largo de los años <span class="math notranslate nohighlight">\(2013\)</span> a <span class="math notranslate nohighlight">\(2018\)</span>. Para el Evento Dengue, del <span class="math notranslate nohighlight">\(2013\)</span> a <span class="math notranslate nohighlight">\(2016\)</span> tiene la mayor de casos, con una caída abrupta para el año <span class="math notranslate nohighlight">\(2017\)</span>. Mientras que, para el Evento Dengue grave, del <span class="math notranslate nohighlight">\(2013\)</span> a <span class="math notranslate nohighlight">\(2017\)</span>, la cantidad de pacientes sigue una tendencia decreciente.</p>
+</section>
+<section id="decesos-por-evento">
+<h4>Decesos por evento<a class="headerlink" href="#decesos-por-evento" title="Link to this heading">#</a></h4>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cantidad de decesos por evento
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Evento</th>
+      <th>Decesos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>DENGUE GRAVE</td>
+      <td>239</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>DENGUE</td>
+      <td>14</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Solo el <span class="math notranslate nohighlight">\(0.05\)</span>% de los pacientes murieron a causa de la enfermedad.</p>
+</section>
+</section>
+<section id="estado-del-caso">
+<h3>Estado del caso<a class="headerlink" href="#estado-del-caso" title="Link to this heading">#</a></h3>
+<p>El estado de confirmación del caso por paciente fue catalogado como probable, confirmado por laboratorio o confirmado por nexo epidemiológico. Tomado un estado de referencia para el inicio de la notificación de la enfermedad y otro al final del registro.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estado del caso
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre del Caso</th>
+      <th>Caso inicial</th>
+      <th>Caso final</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Probable</td>
+      <td>386002</td>
+      <td>260957</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Confirmado por laboratorio</td>
+      <td>108799</td>
+      <td>205010</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Confirmado por Nexo Epidemiológico</td>
+      <td>5643</td>
+      <td>26189</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Confirmación de casos por año
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>ANO</th>
+      <th>2013</th>
+      <th>2014</th>
+      <th>2015</th>
+      <th>2016</th>
+      <th>2017</th>
+      <th>2018</th>
+    </tr>
+    <tr>
+      <th>CASO</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Confirmado por Nexo Epidemiológico</th>
+      <td>4491</td>
+      <td>5254</td>
+      <td>5996</td>
+      <td>7022</td>
+      <td>1306</td>
+      <td>2120</td>
+    </tr>
+    <tr>
+      <th>Confirmado por laboratorio</th>
+      <td>57641</td>
+      <td>46357</td>
+      <td>32330</td>
+      <td>40931</td>
+      <td>6399</td>
+      <td>21352</td>
+    </tr>
+    <tr>
+      <th>Probable</th>
+      <td>60309</td>
+      <td>53745</td>
+      <td>56697</td>
+      <td>52164</td>
+      <td>17343</td>
+      <td>20699</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/3822d12f6cb3b0fbde0c2940f61dafdc1a611ed753b4fa90b5fc3eac7caa6038.png" src="_images/3822d12f6cb3b0fbde0c2940f61dafdc1a611ed753b4fa90b5fc3eac7caa6038.png" />
+</div>
+</div>
+<p>La <em>Figura 9</em> muestra la distribución del estado final de los casos de Dengue en Colombia entre el <span class="math notranslate nohighlight">\(2013\)</span> y <span class="math notranslate nohighlight">\(2018\)</span>, diferenciando entre los casos probables, confirmados por laboratorio y confirmados por nexo epidemiológico. Se observa entre el <span class="math notranslate nohighlight">\(2013\)</span> y <span class="math notranslate nohighlight">\(2016\)</span>, predominan los casos probables y confirmados por laboratorio, con una disminución significativa en <span class="math notranslate nohighlight">\(2017\)</span>, año con el menor número de registros. En <span class="math notranslate nohighlight">\(2018\)</span>, los casos confirmados por laboratorio superan ligeramente a los probables. Los casos confirmados por nexo se mantienen en una proporción baja a lo largo de los años, creciente entre él <span class="math notranslate nohighlight">\(2013\)</span> y <span class="math notranslate nohighlight">\(2016\)</span>.</p>
+</section>
+<section id="confirmados">
+<h3>Confirmados<a class="headerlink" href="#confirmados" title="Link to this heading">#</a></h3>
+<p>Para la notificación de cada caso, la variable de confirmación toma el valor 1 para casos confirmados y 0 para casos no confirmados</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cantidad de casos confirmados
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Confirmados</th>
+      <th>Pacientes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>263072</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>237372</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Confirmación de casos por año
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>ANO</th>
+      <th>2013</th>
+      <th>2014</th>
+      <th>2015</th>
+      <th>2016</th>
+      <th>2017</th>
+      <th>2018</th>
+    </tr>
+    <tr>
+      <th>confirmados</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>61147</td>
+      <td>54481</td>
+      <td>57024</td>
+      <td>52304</td>
+      <td>17417</td>
+      <td>20699</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>64407</td>
+      <td>53494</td>
+      <td>39420</td>
+      <td>48712</td>
+      <td>7867</td>
+      <td>23472</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/e862a300979d96114fbfe631b22a24246ecd3fe5143d4581d73ca9c212629def.png" src="_images/e862a300979d96114fbfe631b22a24246ecd3fe5143d4581d73ca9c212629def.png" />
+</div>
+</div>
+<p>La <em>Figura 10</em> muestra la distribución de la confirmación de casos por año en un periodo de <span class="math notranslate nohighlight">\(2013\)</span> a <span class="math notranslate nohighlight">\(2018\)</span>. Se observa que la cantidad de casos confirmados sigue una tendencia decreciente de <span class="math notranslate nohighlight">\(2013\)</span> a <span class="math notranslate nohighlight">\(2016\)</span>, con una caída abrupta en <span class="math notranslate nohighlight">\(2017\)</span> y un ligero aumento en 2018. Por otro lado, en los años <span class="math notranslate nohighlight">\(2014\)</span> al <span class="math notranslate nohighlight">\(2017\)</span>, la cantidad de casos no confirmados fue superior a la de casos confirmados.</p>
+</section>
+<section id="hospitalizacion">
+<h3>Hospitalización<a class="headerlink" href="#hospitalizacion" title="Link to this heading">#</a></h3>
+<p>Pacientes que requirieron hospitalización por enfermedad, se clasifica en (1) Hospitalizados (2) No Hospitalizados.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Distribución de hospitalizados
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Hospitalizacion</th>
+      <th>Pacientes</th>
+      <th>Porcentaje</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>315801</td>
+      <td>63.104</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>184643</td>
+      <td>36.896</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="hospitalizacion-de-pacientes-por-ano">
+<h4>Hospitalización de pacientes por año<a class="headerlink" href="#hospitalizacion-de-pacientes-por-ano" title="Link to this heading">#</a></h4>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cantidad de pacientes hospitalizados por año
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>No Hospitalizado (2)</th>
+      <th>Hospitalizado (1)</th>
+    </tr>
+    <tr>
+      <th>ANO</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013</th>
+      <td>49735</td>
+      <td>75819</td>
+    </tr>
+    <tr>
+      <th>2014</th>
+      <td>39345</td>
+      <td>68630</td>
+    </tr>
+    <tr>
+      <th>2015</th>
+      <td>34390</td>
+      <td>62054</td>
+    </tr>
+    <tr>
+      <th>2016</th>
+      <td>30328</td>
+      <td>70688</td>
+    </tr>
+    <tr>
+      <th>2017</th>
+      <td>9035</td>
+      <td>16249</td>
+    </tr>
+    <tr>
+      <th>2018</th>
+      <td>21810</td>
+      <td>22361</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/2b56e48abf5cb6a691c7658af3087977ab1978b84a5c8244a8167b085d15b6f5.png" src="_images/2b56e48abf5cb6a691c7658af3087977ab1978b84a5c8244a8167b085d15b6f5.png" />
+</div>
+</div>
+<p>La <em>Figura 11</em> muestra el comportamiento de hospitalización de pacientes por año. Entre <span class="math notranslate nohighlight">\(2013\)</span> y <span class="math notranslate nohighlight">\(2015\)</span>, la cantidad de pacientes No Hospitalizados mostró una tendencia descendente hasta el <span class="math notranslate nohighlight">\(2016\)</span>. En contraste, la cantidad de pacientes hospitalizados presentó una disminución continua desde <span class="math notranslate nohighlight">\(2013\)</span> hasta <span class="math notranslate nohighlight">\(2017\)</span>. Finalmente, en <span class="math notranslate nohighlight">\(2018\)</span>, ambos grupos alcanzaron un nivel similar, mostrando una distribución equitativa entre hospitalizados y no hospitalizados.</p>
+</section>
+<section id="pacientes-hospitalizados-por-sexo">
+<h4>Pacientes Hospitalizados por sexo<a class="headerlink" href="#pacientes-hospitalizados-por-sexo" title="Link to this heading">#</a></h4>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x24123499910&gt;
+</pre></div>
+</div>
+<img alt="_images/40ecf16d2a824593747f2e03c9858661e2592c06cc20128b7f581c231dd11d6e.png" src="_images/40ecf16d2a824593747f2e03c9858661e2592c06cc20128b7f581c231dd11d6e.png" />
+</div>
+</div>
+<p>La <em>Figura 12</em> muestra la distribución de pacientes hospitalizados según su sexo a lo largo de los años registrados. En todos los años, la cantidad de pacientes de sexo masculino supera notablemente a la de pacientes femeninos.</p>
+</section>
+<section id="pacientes-hospitalizados-por-evento">
+<h4>Pacientes hospitalizados por evento<a class="headerlink" href="#pacientes-hospitalizados-por-evento" title="Link to this heading">#</a></h4>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hospitalización de pacientes por evento
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>No Hospitalizado (1)</th>
+      <th>Hospitalizado (2)</th>
+    </tr>
+    <tr>
+      <th>EVENTO</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>DENGUE</th>
+      <td>176983</td>
+      <td>314654</td>
+    </tr>
+    <tr>
+      <th>DENGUE GRAVE</th>
+      <td>7660</td>
+      <td>1147</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="pruebas-parametricas">
+<h1><strong>Pruebas paramétricas</strong><a class="headerlink" href="#pruebas-parametricas" title="Link to this heading">#</a></h1>
+<section id="prueba-chi-cuadrado">
+<h2>Prueba chi-cuadrado<a class="headerlink" href="#prueba-chi-cuadrado" title="Link to this heading">#</a></h2>
+<p>Para las variables clínicas de interés se quiere saber cuál es la relación entre estas y sus posibles relaciones.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tabla cruzada prueba chi Cuadrado
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable 1</th>
+      <th>Variable 2</th>
+      <th>Chi2</th>
+      <th>Valor p</th>
+      <th>Decisión</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>PAC_HOS</td>
+      <td>SEMANA</td>
+      <td>1543.7076</td>
+      <td>0.0000</td>
+      <td>Hay relación</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>PAC_HOS</td>
+      <td>SEXO</td>
+      <td>0.5321</td>
+      <td>0.4657</td>
+      <td>No hay relación</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>PAC_HOS</td>
+      <td>EVENTO</td>
+      <td>9654.7541</td>
+      <td>0.0000</td>
+      <td>Hay relación</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CON_FIN</td>
+      <td>PAC_HOS</td>
+      <td>281.7138</td>
+      <td>0.0000</td>
+      <td>Hay relación</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CON_FIN</td>
+      <td>SEMANA</td>
+      <td>108.4131</td>
+      <td>0.3640</td>
+      <td>No hay relación</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CON_FIN</td>
+      <td>SEXO</td>
+      <td>2.7500</td>
+      <td>0.2528</td>
+      <td>No hay relación</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>CON_FIN</td>
+      <td>EVENTO</td>
+      <td>12583.4615</td>
+      <td>0.0000</td>
+      <td>Hay relación</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>confirmados</td>
+      <td>PAC_HOS</td>
+      <td>20156.4926</td>
+      <td>0.0000</td>
+      <td>Hay relación</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>confirmados</td>
+      <td>CON_FIN</td>
+      <td>87.9502</td>
+      <td>0.0000</td>
+      <td>Hay relación</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>confirmados</td>
+      <td>SEXO</td>
+      <td>132.4649</td>
+      <td>0.0000</td>
+      <td>Hay relación</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>confirmados</td>
+      <td>SEMANA</td>
+      <td>1172.7880</td>
+      <td>0.0000</td>
+      <td>Hay relación</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Resultados:</p>
+<ul class="simple">
+<li><p><strong>Hospitalización</strong>:
+Está relacionada con la semana epidemiológica y el tipo de evento. Puede indicar brotes en periodos del año.</p></li>
+<li><p><strong>Condición final</strong>:
+El desenlace final se ve afectado por la hospitalización y el evento. Tasas de mortalidad por casos.</p></li>
+<li><p><strong>Casos confirmados</strong>:
+La hospitalización está altamente relacionada con la confirmación de casos, así como la condición final. El sexo y la semana influyen en la cantidad de casos confirmados.
+El número de confirmados cambia según la semana y afecta la hospitalización y desenlace.</p></li>
+<li><p><strong>Sin relación:</strong>
+El sexo no tiene impacto significativo en el desenlace final o en la hospitalización. La semana no influye en el desenlace final.</p></li>
+</ul>
+</section>
+<section id="prueba-u">
+<h2>Prueba U<a class="headerlink" href="#prueba-u" title="Link to this heading">#</a></h2>
+<p>Se analiza si la diferencia entre la fecha de inicio de síntomas y la fecha de consulta influye en la hospitalización o la confirmación del caso.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prueba Mann-Whitney U para Hospitalización:
+  Estadístico U: 31707588307.5
+  Valor p: 0.0000
+  Diferencia significativa en la demora según Hospitalización.
+
+Prueba Mann-Whitney U para Confirmación de Casos:
+  Estadístico U: 36757938149.5
+  Valor p: 0.0000
+  Diferencia significativa en la demora según Confirmación de Casos.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Los resultados de la prueba de <strong>Mann-Whitney U</strong> indican que existe una diferencia estadísticamente significativa en la demora en consulta según la hospitalización y la confirmación de casos (<em>p</em> &lt; 0.05 en ambos casos). Esto sugiere que el tiempo transcurrido entre el inicio de los síntomas y la consulta médica varía de manera importante entre pacientes hospitalizados y no hospitalizados, así como entre casos confirmados y no confirmados.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introducción</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Modelos_Dengue.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Modelos de clasificación</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Análisis exploratorio del Dengue en Colombia</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-de-los-datos">Descripción de los datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#requerimientos-e-importaciones">Requerimientos e importaciones</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-archivos-y-seleccion-de-variables-de-interes">Lectura de archivos y selección de variables de interes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptivo-de-variables"><strong>Descriptivo de variables</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-nulos">Valores nulos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#informacion-demografica"><strong>Información demográfica</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edad">Edad</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#grupo-de-edad-menores-a-5-anos">Grupo de edad menores a 5 años</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#grupo-de-edad-mayores-a-65-anos">Grupo de edad mayores a 65 años</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general">General</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ubicacion"><strong>Ubicación</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#departamentos">Departamentos</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#departamentos-por-densidad-poblacional">Departamentos por densidad poblacional</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#municipios">Municipios</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporales"><strong>Temporales</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#semana">Semana</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-clinicos"><strong>Datos clínicos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evento">Evento</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#evento-por-anos">Evento por años</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#decesos-por-evento">Decesos por evento</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estado-del-caso">Estado del caso</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confirmados">Confirmados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hospitalizacion">Hospitalización</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hospitalizacion-de-pacientes-por-ano">Hospitalización de pacientes por año</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pacientes-hospitalizados-por-sexo">Pacientes Hospitalizados por sexo</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pacientes-hospitalizados-por-evento">Pacientes hospitalizados por evento</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-parametricas"><strong>Pruebas paramétricas</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-chi-cuadrado">Prueba chi-cuadrado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-u">Prueba U</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
