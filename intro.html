@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Introducción &#8212; My sample book</title>
+    <title>1. Introducción &#8212; Modelos de clasificación de casos de Dengue</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Análisis exploratorio del Dengue en Colombia" href="EDA.html" />
+    <link rel="next" title="2. Exploración y análisis de datos" href="EDA.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -156,8 +156,8 @@
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+    <img src="_static/logo.png" class="logo__image only-light" alt="Modelos de clasificación de casos de Dengue - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Modelos de clasificación de casos de Dengue - Home"/>`);</script>
   
   
 </a></div>
@@ -178,15 +178,14 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    Introducción
+                    1. Introducción
                 </a>
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="EDA.html"><strong>Análisis exploratorio del Dengue en Colombia</strong></a></li>
-
-
-<li class="toctree-l1"><a class="reference internal" href="Modelos_Dengue.html"><strong>Modelos de clasificación</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="EDA.html">2. Exploración y análisis de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Pipelines.html">3. Modelos de clasificación y evaluación comparativa</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stacking.html">4. Desarrollo del modelo propuesto</a></li>
 </ul>
 
     </div>
@@ -359,7 +358,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -370,11 +371,26 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Introducción</h1>
+    <h1>1. Introducción</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-dengue-como-problema-de-salud-publica">1.1. El dengue como problema de salud pública</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-casos">1.1.1. Clasificación de casos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo-del-estudio">1.2. Objetivo del estudio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hipotesis-tecnica">1.3. Hipótesis técnica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enfoque-metodologico">1.4. Enfoque metodológico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propuesta-del-modelo">1.5. Propuesta del modelo</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -385,18 +401,108 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduccion">
-<h1>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h1>
-<p>Este es un book informativo sobre modelos de clasficación para la confirmación de casos de dengue.</p>
-<p>Proyecto clase Machine Learning
-Universidad del Norte
-2025-10</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="EDA.html"><strong>Análisis exploratorio del Dengue en Colombia</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="EDA.html#descriptivo-de-variables"><strong>Descriptivo de variables</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="EDA.html#pruebas-parametricas"><strong>Pruebas paramétricas</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="Modelos_Dengue.html"><strong>Modelos de clasificación</strong></a></li>
+<h1>1. Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h1>
+<section id="el-dengue-como-problema-de-salud-publica">
+<h2>1.1. El dengue como problema de salud pública<a class="headerlink" href="#el-dengue-como-problema-de-salud-publica" title="Link to this heading">#</a></h2>
+<p>El dengue es una <strong>enfermedad febril aguda de etiología viral</strong>,  transmitida por vectores del género <em>Aedes (A. aegypti y A. albopictus)</em>. Según la Organización mundial de la salud (OMS), esta patología representa una de las mayores cargas sanitarias en regiones tropicales y subtropicales, con un estimado de <strong>390 millones de infecciones anuales</strong> a nivel global (OMS, 2023). Su espectro clínico varía desde formas asintomáticas hasta cuadros graves que requieren intervención médica urgente.</p>
+<p>En Colombia, el dengue constituye un <strong>reto epidemiológico prioritario</strong> debido a su patrón endemo-epidémico y la amplia distribución del vector en el territorio nacional (73.3% según el INS, 2024). El  Instituto Nacional de Salud (INS) reporta ciclos epidémicos cada 3 a 5 años, asociados a factores climáticos y sociodemográficos. Desde 2013, el país ha fortalecido sus estrategias de vigilancia reforzada a través del Sistema Nacional de Vigilancia en Salud pública (SIVIGILA), que exige la notificación obligatoria de casos sospechosos y confirmados.</p>
+<section id="clasificacion-de-casos">
+<h3>1.1.1. Clasificación de casos<a class="headerlink" href="#clasificacion-de-casos" title="Link to this heading">#</a></h3>
+<p>Los registros epidemiológicos distinguen dos categorías principales:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tipo de caso</p></th>
+<th class="head"><p>Criterios de clasificación</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>No confirmado</p></td>
+<td><p>Pacientes con cuadro febril agudo (2 a 7 días) y signos de alarma compatibles con dengue, sin confirmación diagnóstica.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Confirmado</p></td>
+<td><p>Diagnóstico corroborado mediante pruebas de laboratorio (PCR, ELISA) o nexo epidemiológico.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>La detección temprana de casos resulta fundamental para:</p>
+<ul class="simple">
+<li><p>Reducir la mortalidad mediante el tratamiento oportuno.</p></li>
+<li><p>Contener brotes a través del control vectorial.</p></li>
+<li><p>Optimizar recursos en sistemas de salud, especialmente en contextos con capacidad limitada.</p></li>
 </ul>
+</section>
+</section>
+<section id="objetivo-del-estudio">
+<h2>1.2. Objetivo del estudio<a class="headerlink" href="#objetivo-del-estudio" title="Link to this heading">#</a></h2>
+<p>El objetivo principal de este estudio es <strong>desarrollar un modelo de aprendizaje automático para la clasificación precisa de casos confirmados de dengue</strong>, utilizando variables clínicas, demográficas y epidemiológicas extraídas de SIVIGILA. Dada la naturaleza de alto riesgo de los falsos negativos en este contexto, el modelo busca <strong>maximizar la sensibilidad (recall)</strong>, es decir, la capacidad de identificar el mayor número posible de casos positivos, sin comprometer la estabilidad predictiva.</p>
+</section>
+<section id="hipotesis-tecnica">
+<h2>1.3. Hipótesis técnica<a class="headerlink" href="#hipotesis-tecnica" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><em>Un enfoque basado en modelos ensamblados (stacking) puede superar el rendimiento de clasificadores individuales al combinar sus fortalezas para detectar patrones complejos en datos heterogéneos y desbalanceados.</em></p>
+</div></blockquote>
+</section>
+<section id="enfoque-metodologico">
+<h2>1.4. Enfoque metodológico<a class="headerlink" href="#enfoque-metodologico" title="Link to this heading">#</a></h2>
+<p>Para validar esta hipótesis, se implementó un flujo de trabajo estructurado en dos etapas:</p>
+<ol class="arabic simple">
+<li><p>Evaluación de modelos base y optimización:</p></li>
+</ol>
+<p>Se evaluaron 10 algoritmos clásicos y de ensamble, agrupados según su naturaleza:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Categoría</p></th>
+<th class="head"><p>Modelos Evaluados</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Modelos lineales</p></td>
+<td><p>Regresión logística con penalización Ridge y Lasso</p></td>
+</tr>
+<tr class="row-odd"><td><p>Métodos basados en distancias</p></td>
+<td><p>K-Nearest Neighbors</p></td>
+</tr>
+<tr class="row-even"><td><p>Algoritmos probabilísticos</p></td>
+<td><p>Naive Bayes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Árboles de decisión</p></td>
+<td><p>Decision Tree</p></td>
+</tr>
+<tr class="row-even"><td><p>Métodos de ensamble</p></td>
+<td><p>Random Forest y XGBoost</p></td>
+</tr>
+<tr class="row-odd"><td><p>Métodos de margen</p></td>
+<td><p>Support Vector Machine, Linear Support Vector Regression</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Proceso de optimización</strong></p>
+<ul class="simple">
+<li><p>Búsqueda de hiperparámetros mediante validación cruzada.</p></li>
+<li><p>Métricas prioritarias: Recall (sensibilidad), F1-Score y ROC-AUC</p></li>
+<li><p>Balanceo de clases mediante el ajuste de pesos.</p></li>
+<li><p>En los casos necesarios, se aplicaron estandarización y reducción de dimensionalidad.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Selección y combinación óptima:</p></li>
+</ol>
+<p>Tras la evaluación inicial, se identificaron los dos mejores modelo base según el mayor recall, estabilidad en las curvas ROC, y mejor interpretabilidad. Luego se exploraron diferentes enfoques de ensamblado, incluyendo:</p>
+<ul class="simple">
+<li><p>Voting Classifier,</p></li>
+<li><p>Stacking simple</p></li>
+<li><p>Stacking con passthrough</p></li>
+</ul>
+</section>
+<section id="propuesta-del-modelo">
+<h2>1.5. Propuesta del modelo<a class="headerlink" href="#propuesta-del-modelo" title="Link to this heading">#</a></h2>
+<p>Como resultado de este análisis comparativo, se propone una solución final denominada <strong>SD-GBClassifier</strong> <em>(Stacked Dengue - Gradient Boosting Classifier)</em>. Este modelo integra predicciones provenientes de Random Forest y XGBoost dentro de una arquitectura de stacking, con un meta-modelo Gradient Boosting, optimizado para la detección de casos confirmados de dengue en Colombia.</p>
+<p><strong>Proyecto de clase Machine Learning</strong><br />
+<strong>Universidad del Norte</strong><br />
+<strong>2025-10</strong></p>
+</section>
+<div class="toctree-wrapper compound">
 </div>
 </section>
 
@@ -435,7 +541,7 @@ Universidad del Norte
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>Análisis exploratorio del Dengue en Colombia</strong></p>
+        <p class="prev-next-title">2. Exploración y análisis de datos</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -446,6 +552,28 @@ Universidad del Norte
             
             
               
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-dengue-como-problema-de-salud-publica">1.1. El dengue como problema de salud pública</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-casos">1.1.1. Clasificación de casos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo-del-estudio">1.2. Objetivo del estudio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hipotesis-tecnica">1.3. Hipótesis técnica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enfoque-metodologico">1.4. Enfoque metodológico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propuesta-del-modelo">1.5. Propuesta del modelo</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
             
           </div>
           <footer class="bd-footer-content">
@@ -455,7 +583,7 @@ Universidad del Norte
   <div class="footer-item">
     
 <p class="component-author">
-By The Jupyter Book Community
+By Daniella Guerra & Tawny Torres
 </p>
 
   </div>
