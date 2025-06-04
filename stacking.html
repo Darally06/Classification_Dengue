@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -750,20 +750,28 @@ Train: (663096,), Test: (284184,)
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Métricas del modelo propuesto
 
  ---Train---
-Recall:   0.884
-F1 Score: 0.8434
-ROC AUC:  0.9285
+Recall:    0.8818
+F1-score:  0.8668
+AUC-ROC:   0.9285
+Accuracy:  0.8445
+Precision: 0.8523
 
  ---Test---
-Recall:   0.8259
-F1 Score: 0.7725
-ROC AUC:  0.8543
+Recall:    0.8228
+F1-score:  0.8063
+AUC-ROC:   0.8542
+Accuracy:  0.7732
+Precision: 0.7905
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
- ---Reporte de clasificación---
-              precision    recall  f1-score   support
-
-           0       0.75      0.70      0.73    121115
-           1       0.79      0.83      0.81    163069
+           0       0.75      0.71      0.73    121115
+           1       0.79      0.82      0.81    163069
 
     accuracy                           0.77    284184
    macro avg       0.77      0.76      0.77    284184
@@ -788,7 +796,7 @@ weighted avg       0.77      0.77      0.77    284184
 </ul>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="_images/89e181339ce6c1f4c0a6d624b4b96bf3757c77ec60c41cbb9921b5378c343b96.png" src="_images/89e181339ce6c1f4c0a6d624b4b96bf3757c77ec60c41cbb9921b5378c343b96.png" />
+<img alt="_images/285e9df14bf9ae307d40e5611cd2b9356b15294d8029103353b894525106986a.png" src="_images/285e9df14bf9ae307d40e5611cd2b9356b15294d8029103353b894525106986a.png" />
 </div>
 </div>
 <p>El modelo <em>SD-GBClassifier propuesto</em> demuestra ser especialmente adecuado para el contexto del estudio, centrado en la <strong>confirmación de casos de dengue</strong>, donde es crucial maximizar el recall con el fin de minimizar los falsos negativos.</p>
@@ -801,10 +809,10 @@ weighted avg       0.77      0.77      0.77    284184
 <h3>4.3.2. Curvas de rendimiento<a class="headerlink" href="#curvas-de-rendimiento" title="Link to this heading">#</a></h3>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x205f6e4eca0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x23321279dc0&gt;
 </pre></div>
 </div>
-<img alt="_images/92039a5c752f9ec7ff44f712d5751bdad26ac3d836d035b362b720e7b227258c.png" src="_images/92039a5c752f9ec7ff44f712d5751bdad26ac3d836d035b362b720e7b227258c.png" />
+<img alt="_images/8dde1f336e355b9f46e33abe6f601aa0d9ba31af30ad8d1eeb99817764f37b44.png" src="_images/8dde1f336e355b9f46e33abe6f601aa0d9ba31af30ad8d1eeb99817764f37b44.png" />
 </div>
 </div>
 <div class="cell tag_remove-input docutils container">
@@ -813,7 +821,7 @@ weighted avg       0.77      0.77      0.77    284184
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="_images/190b723f791853f2765122dd7a49a9457b4a8763741da07a640e851aa1aa5113.png" src="_images/190b723f791853f2765122dd7a49a9457b4a8763741da07a640e851aa1aa5113.png" />
+<img alt="_images/07a5efdf1872d45c685159838110e2802dc8a50705bea76f6dbe9c52811fcda4.png" src="_images/07a5efdf1872d45c685159838110e2802dc8a50705bea76f6dbe9c52811fcda4.png" />
 </div>
 </div>
 <p>Al comparar el modelo <em>SD-GBClassifier propuesto</em> con Random Forest y XGBoost, se observa que Random Forest tiene una ligera ventaja en el AUC de la curva ROC (0.86 vs. 0.85 del <em>SD-GBClassifier propuesto</em> y 0.83 de XGBoost). Sin embargo, en la curva de precisión-recall, <em>SD-GBClassifier propuesto</em> se destaca, superando levemente a ambos competidores.</p>
@@ -880,15 +888,23 @@ weighted avg       0.77      0.77      0.77    284184
 <p>A continuación se presentan las variables más relevantes identificadas por cada modelo base, se usa <code class="docutils literal notranslate"><span class="pre">feature_importances_</span></code> para destacar las 5 características más importantes por modelo.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="_images/4c75df83fbb0805b40b9a377aaba5e51d40c6c42997792b7dfd6a75fc63cb78f.png" src="_images/4c75df83fbb0805b40b9a377aaba5e51d40c6c42997792b7dfd6a75fc63cb78f.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Importancia de características (Permutation):
+          feature  importance       std
+6        DPTO_OCU    0.153702  0.001222
+9             ANO    0.122544  0.001296
+7         MUN_OCU    0.074650  0.000947
+10        PAC_HOS    0.055264  0.000693
+17       TIP_SS_S    0.027604  0.000709
+8          SEMANA    0.021740  0.000458
+0   EDAD_AJUSTADA    0.008910  0.000584
+4            AREA    0.007828  0.000167
+16       TIP_SS_P    0.002816  0.000054
+15       TIP_SS_N    0.002712  0.000129
+</pre></div>
+</div>
+<img alt="_images/cebeceb105499be03d88e87553320a4927ed1becfb3aef28bd1ef0f4e131eba7.png" src="_images/cebeceb105499be03d88e87553320a4927ed1becfb3aef28bd1ef0f4e131eba7.png" />
 </div>
 </div>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="_images/34502cba628c0b709792eca9e84089c507f336c83e0a22cdb7a52193e4fd70e2.png" src="_images/34502cba628c0b709792eca9e84089c507f336c83e0a22cdb7a52193e4fd70e2.png" />
-</div>
-</div>
-<p>Para los modelos base, las características relacionadas al departamento, el municipio, el año y la semana epidemiológica de ocurrencia del caso, asi como la edad del paciente o si este requirió hospitalización fueron las que tuvieron mayor peso (mayor al 10%).</p>
 </section>
 <section id="importancia-global-de-caracteristicas">
 <h3>4.4.2 Importancia global de características<a class="headerlink" href="#importancia-global-de-caracteristicas" title="Link to this heading">#</a></h3>
